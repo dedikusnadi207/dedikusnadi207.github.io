@@ -33,6 +33,28 @@ const experiences = [
     ] },
 ];
 
+const skillTypes = [
+    {name: "All", data: "*"},
+    {name: "Programming Language", data: ".programming-language"},
+    {name: "Framework", data: ".framework"},
+    {name: "DBMS", data: ".dbms"},
+    {name: "Caching", data: ".caching"},
+    {name: "Versioning", data: ".versioning"},
+];
+
+const skillItems = [
+    {name: "PHP", image: "assets/img/php.png", type: "programming-language"},
+    {name: "Javascript", image: "assets/img/js.png", type: "programming-language"},
+    {name: "Golang", image: "assets/img/go.webp", type: "programming-language"},
+    {name: "Python", image: "assets/img/python.png", type: "programming-language"},
+    {name: "Laravel", image: "assets/img/laravel.png", type: "framework"},
+    {name: "Django REST", image: "assets/img/django.png", type: "framework"},
+    {name: "PostgreSQL", image: "assets/img/postgresql.png", type: "dbms"},
+    {name: "MySQL", image: "assets/img/mysql.png", type: "dbms"},
+    {name: "Redis", image: "assets/img/redis.png", type: "caching"},
+    {name: "Git", image: "assets/img/git.png", type: "versioning"},
+];
+
 $(document).ready(function () {
     setElementText($('.first-name'), firstName);
     setElementText($('.last-name'), lastName);
@@ -47,6 +69,8 @@ $(document).ready(function () {
     $('#linkedIn').text("LinkedIn").attr('href', linkedIn)
     renderEducations();
     renderExperiences();
+    renderSkillTypes();
+    renderSkillItems();
 });
 
 function setElementText(element, text) {
@@ -84,4 +108,39 @@ function renderExperiences() {
       `</li>`;
     });
     $('#experience').html(html);
+}
+
+function renderSkillTypes() {
+    let html = "";
+    skillTypes.forEach(element => {
+        html += `<button class="btn btn-theme-outline ${html == '' ? 'selected' : '' }" data-filter="${element.data}">${element.name}</button>`;
+    });
+    $("#skill-types").html(html);
+}
+
+function renderSkillItems() {
+    let html = "";
+    skillItems.forEach(element => {
+    //     html += `<div class="grid-item apps wow zoomIn">
+    //     <div class="card card-service wow fadeInUp">
+    //       <div class="icon">
+    //         <img src="assets/img/php.png" alt="" style="object-fit: contain;">
+    //       </div>
+    //       <div class="caption">
+    //         <h4 class="fg-theme">PHP</h4>
+    //       </div>
+    //     </div>
+    //   </div>`
+        html += `<div class="grid-item ${element.type} wow zoomIn">
+        <div class="card card-service wow fadeInUp">
+          <div class="icon">
+            <img src="${element.image}" alt="" style="object-fit: contain;">
+          </div>
+          <div class="caption">
+            <h4 class="fg-theme">${element.name}</h4>
+          </div>
+        </div>
+      </div>`;
+    });
+    $("#skill-items").html(html);
 }
